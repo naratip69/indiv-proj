@@ -13,8 +13,8 @@ const StudentSchema = new Schema({
     enum: [
       "no Advisor",
       "have Adivsor",
-      "done proposal test",
-      "finised test",
+      "done proposal exam",
+      "finished exam",
       "graduated",
     ],
   },
