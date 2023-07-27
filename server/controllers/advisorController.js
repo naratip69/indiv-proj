@@ -102,4 +102,57 @@ exports.advisor_delete_post = asyncHandler(async (req, res, next) => {
   res.json(advisor);
 });
 
-exports.advisor_update_get = asyncHandler(async (req, res, next) => {});
+exports.advisor_update_get = asyncHandler(async (req, res, next) => {
+  const advisor = await Advisor.findById(req.params.id).exec();
+
+  if (advisor === null) {
+    const err = new Error("Advisor not found");
+    err.status = 404;
+    return next(err);
+  }
+
+  res.json(advisor);
+});
+
+exports.advisor_update_post = [
+  body("first_name")
+    .trim()
+    .isLength({ min: 1 })
+    .escape()
+    .withMessage("First name must be specified.")
+    .isAlphanumeric()
+    .withMessage("First name has non-alphanumeric characters."),
+  body("family_name")
+    .trim()
+    .isLength({ min: 1 })
+    .escape()
+    .withMessage("Family name must be specified.")
+    .isAlphanumeric()
+    .withMessage("Family name has non-alphanumeric characters."),
+  body("email").trim().isEmail().escape().withMessage("invalid email"),
+  body("academic_title.*").escape(),
+  asyncHandler(async (req, res, next) => {
+    const errors = validationResult(req);
+    const advisor = new Advisor({
+      _id: req.params.id,
+      first_name: req.body.first_name,
+      family_name: req.body.family_name,
+      academic_title: req.body.academic_title,
+      email: req.body.email,
+    });
+
+    if (!errors.isEmpty()) {
+      res.json({
+        advisor: advisor,
+        errors: errors.array(),
+      });
+    } else {
+      const update_advisor = await Advisor.findByIdAndUpdate(
+        req.params.id,
+        advisor,
+        {}
+      );
+      res.json(update_advisor);
+    }
+  }),
+];
