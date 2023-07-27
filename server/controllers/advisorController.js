@@ -65,3 +65,41 @@ exports.advisor_create_post = [
     }
   }),
 ];
+
+exports.advisor_delete_get = asyncHandler(async (req, res, next) => {
+  const [advisor, studentsInAdvised] = await Promise.all([
+    Advisor.findById(req.body.id).exec(),
+    Student.find({ advisor: req.params.id }, { status: 1, advisor: 1 }).exec(),
+  ]);
+
+  res.json({
+    advisor: advisor,
+    studentsInAdvised: studentsInAdvised,
+  });
+});
+
+exports.advisor_delete_post = asyncHandler(async (req, res, next) => {
+  const [advisor, studentsInAdvised] = await Promise.all([
+    Advisor.findById(req.body.id).exec(),
+    Student.find({ advisor: req.params.id }, { status: 1, advisor: 1 }).exec(),
+  ]);
+
+  for (let student of studentsInAdvised) {
+    if (student.status === "have Advisor") {
+      await Student.updateOne(
+        { _id: student._id },
+        { $set: { status: "no Advisor", advisor: undefined } }
+      );
+    } else {
+      await Student.updateOne(
+        { _id: student._id },
+        { $set: { advisor: undefined } }
+      );
+    }
+  }
+
+  await Advisor.findByIdAndDelete(req.params.id);
+  res.json(advisor);
+});
+
+exports.advisor_update_get = asyncHandler(async (req, res, next) => {});
