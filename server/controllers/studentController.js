@@ -82,7 +82,7 @@ exports.student_create_post = [
       res.json({
         advisors: allAdvisors,
         student: student,
-        errors: errors,
+        errors: errors.array(),
       });
     } else {
       await student.save();
@@ -100,4 +100,22 @@ exports.student_delete_post = asyncHandler(async (req, res, next) => {
   }
   await Student.findByIdAndDelete(req.params.id);
   res.json(student);
+});
+
+exports.student_update_get = asyncHandler(async (req, res, next) => {
+  const [student, allAdvisors] = await Promise.all([
+    Student.findById(req.params.id).populate("advisor").exec(),
+    Advisor.find().exec(),
+  ]);
+
+  if (student === null) {
+    const err = new Error("Student not found");
+    err.status = 404;
+    return next(err);
+  }
+
+  res.json({
+    student: student,
+    advisor: allAdvisors,
+  });
 });
