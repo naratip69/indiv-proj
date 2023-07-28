@@ -72,6 +72,12 @@ exports.advisor_delete_get = asyncHandler(async (req, res, next) => {
     Student.find({ advisor: req.params.id }, { status: 1, advisor: 1 }).exec(),
   ]);
 
+  if (advisor === null) {
+    const err = new Error("Advisor not found");
+    err.status = 404;
+    return next(err);
+  }
+
   res.json({
     advisor: advisor,
     studentsInAdvised: studentsInAdvised,

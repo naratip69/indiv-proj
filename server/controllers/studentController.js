@@ -90,3 +90,14 @@ exports.student_create_post = [
     }
   }),
 ];
+
+exports.student_delete_post = asyncHandler(async (req, res, next) => {
+  const student = await Student.findById(req.params.id).exec();
+  if (student === null) {
+    const err = new Error("Student not found");
+    err.status = 404;
+    return next(err);
+  }
+  await Student.findByIdAndDelete(req.params.id);
+  res.json(student);
+});
