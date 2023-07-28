@@ -176,3 +176,59 @@ exports.student_update_post = [
     }
   }),
 ];
+
+exports.student_add_publication = [
+  body("title", "Title must not be empty.")
+    .trim()
+    .isLength({ minLenght: 1 })
+    .escape(),
+  body("url", "Link must not be empty")
+    .trim()
+    .isLength({ minLenght: 1 })
+    .escape(),
+  asyncHandler(async (req, res, next) => {
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+      res.json({ errors: errors.array() });
+    }
+
+    const student = await Student.findById(req.params.id).exec();
+    const new_publication = { title: req.body.title, url: req.body.url };
+    const new_publications = [...student.publications, new_publication];
+
+    await Student.updateOne(
+      { _id: req.params.id },
+      { $set: { publications: new_publications } }
+    );
+
+    res.json(student);
+  }),
+];
+
+exports.student_remove_publication = [
+  body("title", "Title must not be empty.")
+    .trim()
+    .isLength({ minLenght: 1 })
+    .escape(),
+  asyncHandler(async (req, res, next) => {
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+      res.json({ errors: errors.array() });
+    }
+
+    const student = await Student.findById(req.params.id).exec();
+    const new_publication = { title: req.body.title, url: req.body.url };
+    const new_publications = student.publications.filter(
+      (e) => e.title !== req.body.title
+    );
+
+    await Student.updateOne(
+      { _id: req.params.id },
+      { $set: { publications: new_publications } }
+    );
+
+    res.json(student);
+  }),
+];
