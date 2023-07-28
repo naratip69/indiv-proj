@@ -29,4 +29,21 @@ exports.student_list = asyncHandler(async (req, res, next) => {
   return res.json(students);
 });
 
-exports.student_detail = asyncHandler(async (req, res, next) => {});
+exports.student_detail = asyncHandler(async (req, res, next) => {
+  const student = await Student.findById(req.params.id)
+    .populate("advisor")
+    .exec();
+
+  if (student === null) {
+    const err = new Error("Student not found");
+    err.status = 404;
+    return next(err);
+  }
+
+  res.json(student);
+});
+
+exports.student_create_get = asyncHandler(async (req, res, next) => {
+  const allAdvisors = await Advisor.find().exec();
+  res.json(allAdvisors);
+});
