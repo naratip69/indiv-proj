@@ -74,6 +74,7 @@ exports.student_create_post = [
       email: req.body.email,
       tel: req.body.tel,
       status: req.body.status,
+      publications: [],
     });
     if (req.body.advisor !== "undefined") student.advisor = req.body.advisor;
 
@@ -119,3 +120,59 @@ exports.student_update_get = asyncHandler(async (req, res, next) => {
     advisor: allAdvisors,
   });
 });
+
+exports.student_update_post = [
+  body("first_name", "First name must not be empty.")
+    .trim()
+    .isLength({ min: 1 })
+    .escape(),
+  body("family_name", "Family name must not be empty.")
+    .trim()
+    .isLength({ min: 1 })
+    .escape(),
+  body("academic_year", "Academic year must not be empty.").trim().escape(),
+  body("email", "Email is not valid").trim().isEmail().escape(),
+  body("tel", "Phone number must not be empty.")
+    .trim()
+    .isMobilePhone()
+    .escape(),
+  body("status.*").escape(),
+  asyncHandler(async (req, res, next) => {
+    const errors = validationResult(req);
+
+    const old_student = await Student.find(
+      { _id: req.params.id },
+      { publications: 1 }
+    ).exec();
+
+    const student = new Student({
+      _id: old_student._id,
+      first_name: req.body.first_name,
+      family_name: req.body.family_name,
+      academic_year: req.body.academic_year,
+      email: req.body.email,
+      tel: req.body.tel,
+      status: req.body.status,
+      publications: old_student.publications,
+    });
+
+    if (req.body.advisor) student.advisor = req.body.advisor;
+
+    if (!errors.isEmpty()) {
+      const allAdvisors = Advisor.find().exec();
+
+      res.json({
+        student: student,
+        advisors: allAdvisors,
+        errors: errors.array(),
+      });
+    } else {
+      const update_student = await Student.findByIdAndUpdate(
+        req.params.id,
+        student,
+        {}
+      );
+      req.json(update_student);
+    }
+  }),
+];
