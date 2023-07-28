@@ -47,3 +47,46 @@ exports.student_create_get = asyncHandler(async (req, res, next) => {
   const allAdvisors = await Advisor.find().exec();
   res.json(allAdvisors);
 });
+
+exports.student_create_post = [
+  body("first_name", "First name must not be empty.")
+    .trim()
+    .isLength({ min: 1 })
+    .escape(),
+  body("family_name", "Family name must not be empty.")
+    .trim()
+    .isLength({ min: 1 })
+    .escape(),
+  body("academic_year", "Academic year must not be empty.").trim().escape(),
+  body("email", "Email is not valid").trim().isEmail().escape(),
+  body("tel", "Phone number must not be empty.")
+    .trim()
+    .isMobilePhone()
+    .escape(),
+  body("status.*").escape(),
+  asyncHandler(async (req, res, next) => {
+    const errors = validationResult(req);
+
+    const student = new Student({
+      first_name: req.body.first_name,
+      family_name: req.body.family_name,
+      academic_year: req.body.academic_year,
+      email: req.body.email,
+      tel: req.body.tel,
+      status: req.body.status,
+    });
+    if (req.body.advisor !== "undefined") student.advisor = req.body.advisor;
+
+    if (!errors.isEmpty()) {
+      const allAdvisors = await Advisor.find.exec();
+      res.json({
+        advisors: allAdvisors,
+        student: student,
+        errors: errors,
+      });
+    } else {
+      await student.save();
+      res.json(student);
+    }
+  }),
+];
