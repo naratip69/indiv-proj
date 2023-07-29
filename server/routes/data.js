@@ -4,6 +4,10 @@ const router = express.Router();
 const advisor_controller = require("../controllers/advisorController");
 const student_controller = require("../controllers/studentController");
 
+router.get("/", function (req, res, next) {
+  res.redirect("/students");
+});
+
 router.get("/students", student_controller.student_list);
 router.post("/students", student_controller.student_list);
 
@@ -37,3 +41,5 @@ router.get("/advisor/:id/update", advisor_controller.advisor_update_get);
 router.post("/advisor/:id/update", advisor_controller.advisor_update_post);
 
 router.get("/advisor/:id", advisor_controller.advisor_detail);
+
+module.exports = router;

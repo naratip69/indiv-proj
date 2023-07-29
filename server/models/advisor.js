@@ -18,14 +18,14 @@ const AdvisorSchema = new Schema({
   email: { type: String, require: true },
 });
 
-Advisor.virtual("name").get(function () {
+AdvisorSchema.virtual("name").get(function () {
   let fullname = "";
   if (this.first_name && this.family_name) {
     fullname = `${this.first_name} ${this.family_name}`;
   }
 });
 
-Advisor.virtual("url").get(function () {
+AdvisorSchema.virtual("url").get(function () {
   return `/info/advisor/${this._id}`;
 });
 
