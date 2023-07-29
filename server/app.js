@@ -6,8 +6,17 @@ var logger = require("morgan");
 
 const dataRouter = require("./routes/data");
 const mongoose = require("mongoose");
+require("dotenv").config();
 
 var app = express();
+mongoose.set("strictQuery", false);
+const mongoDB = process.env.URL;
+
+main().catch((err) => console.log(err));
+
+async function main() {
+  await mongoose.connect(mongoDB);
+}
 
 app.use(logger("dev"));
 app.use(express.json());
