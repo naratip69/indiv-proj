@@ -13,11 +13,11 @@ export default function StudentsList() {
 
   async function fetchData() {
     const res = await fetch(`${URL}/students`);
-    console.log(res);
+    // console.log(res);
     const data = await res.json();
-    console.log(data);
+    // console.log(data);
     setStudents(data.students);
-    console.log(students);
+    // console.log(students);
   }
 
   async function applyFilter(e) {
@@ -41,7 +41,7 @@ export default function StudentsList() {
       <h1>Students</h1>
       <form className="filter" onSubmit={applyFilter}>
         <div className="form-row">
-          <label htmlFor="status">status:</label>
+          <label htmlFor="status">Status:</label>
           <select
             type="select"
             placeholder="Select Status"
@@ -70,30 +70,32 @@ export default function StudentsList() {
           <button type="submit">Apply</button>
         </div>
       </form>
-      <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Academic Year</th>
-        <th>Year of Study</th>
-        <th>Email</th>
-        <th>Phone</th>
-        <th>status</th>
-      </tr>
-      {students.length
-        ? students.map((e) => {
-            return (
-              <tr>
-                <td>{e._id ?? "-"}</td>
-                <td>{e.name ?? "-"}</td>
-                <td>{e.academic_year ?? "-"}</td>
-                <td>{e.year_of_study ?? "-"}</td>
-                <td>{e.email ?? "-"}</td>
-                <td>{e.phone ?? "-"}</td>
-                <td>{e.status ?? "-"}</td>
-              </tr>
-            );
-          })
-        : null}
+      <table>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Academic Year</th>
+          <th>Year of Study</th>
+          <th>Email</th>
+          <th>Phone</th>
+          <th>status</th>
+        </tr>
+        {students.length
+          ? students.map((e) => {
+              return (
+                <tr>
+                  <td>{e._id ?? "-"}</td>
+                  <td>{e.name ?? "-"}</td>
+                  <td>{e.academic_year ?? "-"}</td>
+                  <td>{e.year_of_study ?? "-"}</td>
+                  <td>{e.email ?? "-"}</td>
+                  <td>{e.phone ?? "-"}</td>
+                  <td>{e.status ?? "-"}</td>
+                </tr>
+              );
+            })
+          : null}
+      </table>
     </div>
   );
 }
