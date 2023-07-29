@@ -25,3 +25,15 @@ router.post(
 );
 
 router.get("student/:id", student_controller.student_detail);
+
+router.get("/advisors", advisor_controller.advisor_list);
+
+router.post("/advisor/create", advisor_controller.advisor_create_post);
+
+router.get("/advisor/:id/delete", advisor_controller.advisor_delete_get);
+router.post("/advisor/:id/delete", advisor_controller.advisor_delete_post);
+
+router.get("/advisor/:id/update", advisor_controller.advisor_update_get);
+router.post("/advisor/:id/update", advisor_controller.advisor_update_post);
+
+router.get("/advisor/:id", advisor_controller.advisor_detail);
