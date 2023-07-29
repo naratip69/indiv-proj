@@ -5,6 +5,7 @@ var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 
 const dataRouter = require("./routes/data");
+const mongoose = require("mongoose");
 
 var app = express();
 
@@ -29,7 +30,7 @@ app.use(function (err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render("error");
+  res.json("error");
 });
 
 module.exports = app;
