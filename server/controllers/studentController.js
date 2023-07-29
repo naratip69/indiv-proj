@@ -11,22 +11,23 @@ exports.student_list = asyncHandler(async (req, res, next) => {
       { status: status, year_of_study: year_of_study },
       { publications: 0 }
     ).exec();
-    return res.json(students);
+    res.json({ students: students });
   } else if (status) {
     const students = await Student.find(
       { status: status },
       { publications: 0 }
     ).exec();
-    return res.json(students);
+    res.json({ students: students });
   } else if (year_of_study) {
     const students = await Student.find(
       { year_of_study: year_of_study },
       { publications: 0 }
     ).exec();
-    return res.json(students);
+    res.json({ students: students });
+  } else {
+    const students = await Student.find({}, { publications: 0 }).exec();
+    res.json({ students: students });
   }
-  const students = await Student.find({}, { publications: 0 }).exec();
-  return res.json(students);
 });
 
 exports.student_detail = asyncHandler(async (req, res, next) => {
