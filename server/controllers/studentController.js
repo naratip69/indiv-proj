@@ -63,11 +63,16 @@ exports.student_create_post = [
     .trim()
     .isMobilePhone()
     .escape(),
+  body("id", "Student ID must have 10 digit")
+    .trim()
+    .isLength({ min: 10, max: 10 })
+    .escape(),
   body("status.*").escape(),
   asyncHandler(async (req, res, next) => {
     const errors = validationResult(req);
 
     const student = new Student({
+      _id: ObjectId(req.body.id),
       first_name: req.body.first_name,
       family_name: req.body.family_name,
       academic_year: req.body.academic_year,
@@ -180,12 +185,9 @@ exports.student_update_post = [
 exports.student_add_publication = [
   body("title", "Title must not be empty.")
     .trim()
-    .isLength({ minLenght: 1 })
+    .isLength({ min: 1 })
     .escape(),
-  body("url", "Link must not be empty")
-    .trim()
-    .isLength({ minLenght: 1 })
-    .escape(),
+  body("url", "Link must not be empty").trim().isLength({ min: 1 }).escape(),
   asyncHandler(async (req, res, next) => {
     const errors = validationResult(req);
 
@@ -209,7 +211,7 @@ exports.student_add_publication = [
 exports.student_remove_publication = [
   body("title", "Title must not be empty.")
     .trim()
-    .isLength({ minLenght: 1 })
+    .isLength({ min: 1 })
     .escape(),
   asyncHandler(async (req, res, next) => {
     const errors = validationResult(req);
