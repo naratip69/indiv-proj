@@ -9,7 +9,7 @@ router.get("/", function (req, res, next) {
 });
 
 router.get("/students", student_controller.student_list);
-router.post("/students", student_controller.student_list);
+router.post("/students", student_controller.student_list_filter);
 
 router.get("/student/create", student_controller.student_create_get);
 router.post("/student/create", student_controller.student_create_post);

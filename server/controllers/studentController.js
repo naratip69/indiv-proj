@@ -4,23 +4,31 @@ const asyncHandler = require("express-async-handler");
 const { body, validationResult } = require("express-validator");
 
 exports.student_list = asyncHandler(async (req, res, next) => {
-  const status = req.body.status;
-  const year_of_study = req.body.year_of_study;
-  if (status && year_of_study) {
+  const students = await Student.find({}, { publications: 0 }).exec();
+  res.json({ students: students });
+});
+
+exports.student_list_filter = asyncHandler(async (req, res, next) => {
+  const status = req.body.status.toString();
+  const year_of_study = req.body.year_of_study.toString();
+  console.log("test");
+  if (status !== "undefined" && year_of_study) {
+    const date = new Date();
     const students = await Student.find(
-      { status: status, year_of_study: year_of_study },
+      { status: status, academic_year: date.getFullYear() - year_of_study },
       { publications: 0 }
     ).exec();
     res.json({ students: students });
-  } else if (status) {
+  } else if (status !== "undefined") {
     const students = await Student.find(
       { status: status },
       { publications: 0 }
     ).exec();
     res.json({ students: students });
   } else if (year_of_study) {
+    const date = new Date();
     const students = await Student.find(
-      { year_of_study: year_of_study },
+      { academic_year: date.getFullYear() - year_of_study },
       { publications: 0 }
     ).exec();
     res.json({ students: students });

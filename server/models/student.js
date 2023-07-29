@@ -1,31 +1,34 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const StudentSchema = new Schema({
-  first_name: { type: String, require: true },
-  family_name: { type: String, require: true },
-  academic_year: { type: Number, require: true },
-  email: { type: String, require: true },
-  tel: { type: String, minLength: 10, maxLength: 10, require: true },
-  status: {
-    type: String,
-    require: true,
-    enum: [
-      "no Advisor",
-      "have Adivsor",
-      "done proposal exam",
-      "finished exam",
-      "graduated",
-    ],
-  },
-  publications: [
-    {
-      title: { type: String, require: true },
-      url: { type: String, require: true },
+const StudentSchema = new Schema(
+  {
+    first_name: { type: String, require: true },
+    family_name: { type: String, require: true },
+    academic_year: { type: Number, require: true },
+    email: { type: String, require: true },
+    tel: { type: String, minLength: 10, maxLength: 10, require: true },
+    status: {
+      type: String,
+      require: true,
+      enum: [
+        "no Advisor",
+        "have Adivsor",
+        "done proposal exam",
+        "finished exam",
+        "graduated",
+      ],
     },
-  ],
-  advisor: { type: Schema.Types.ObjectId, ref: "Advisor" },
-});
+    publications: [
+      {
+        title: { type: String, require: true },
+        url: { type: String, require: true },
+      },
+    ],
+    advisor: { type: Schema.Types.ObjectId, ref: "Advisor" },
+  },
+  { toJSON: { virtuals: true } }
+);
 
 StudentSchema.virtual("year_of_study").get(function () {
   const date = new Date();
@@ -41,7 +44,7 @@ StudentSchema.virtual("name").get(function () {
 });
 
 StudentSchema.virtual("url").get(function () {
-  return `/info/student/${this._id}`;
+  return `/student/${this._id}`;
 });
 
 module.exports = mongoose.model("Student", StudentSchema);
