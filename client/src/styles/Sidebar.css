@@ -8,3 +8,13 @@
   padding-left: 25px;
   font-size: 18px;
 }
+
+.sidebar ul {
+  margin: 5px;
+  list-style: none;
+}
+
+.sidebar a {
+  color: #1d5d8b;
+  text-decoration: none;
+}

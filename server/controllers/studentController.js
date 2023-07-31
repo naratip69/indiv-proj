@@ -39,6 +39,7 @@ exports.student_list_filter = asyncHandler(async (req, res, next) => {
 });
 
 exports.student_detail = asyncHandler(async (req, res, next) => {
+  console.log(req);
   const student = await Student.findById(req.params.id)
     .populate("advisor")
     .exec();
