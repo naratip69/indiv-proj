@@ -1,10 +1,20 @@
-import { Link } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
+import "../styles/Sidebar.css";
 
 export default function Sidebar() {
   return (
-    <nav className="sidebar">
-      <Link to="/students">Students list</Link>
-      <Link to="/advisors">Advisors list</Link>
-    </nav>
+    <div className="page">
+      <nav className="sidebar">
+        <ul>
+          <li>
+            <Link to="/students">Students list</Link>
+          </li>
+          <li>
+            <Link to="/advisors">Advisors list</Link>
+          </li>
+        </ul>
+      </nav>
+      <Outlet />
+    </div>
   );
 }

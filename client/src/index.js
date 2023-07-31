@@ -5,11 +5,12 @@ import reportWebVitals from "./reportWebVitals";
 
 import StudentsList from "./component/StudentsList";
 import AdvisorList from "./component/AdvisorsList";
+import RouteSwitch from "./component/RouteSwitch";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <AdvisorList />
+    <RouteSwitch />
   </React.StrictMode>
 );
 
