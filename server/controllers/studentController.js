@@ -82,7 +82,7 @@ exports.student_create_post = [
     // console.log(req.body);
     // console.log(errors);
     const student = new Student({
-      // _id: ObjectId(req.body.id),
+      id: req.body.id,
       first_name: req.body.first_name,
       family_name: req.body.family_name,
       academic_year: req.body.academic_year,

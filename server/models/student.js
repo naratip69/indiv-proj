@@ -3,6 +3,7 @@ const Schema = mongoose.Schema;
 
 const StudentSchema = new Schema(
   {
+    id: { type: String, require: true, minLength: 10, maxLength: 10 },
     first_name: { type: String, require: true },
     family_name: { type: String, require: true },
     academic_year: { type: Number, require: true },
