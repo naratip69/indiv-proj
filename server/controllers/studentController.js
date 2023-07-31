@@ -55,7 +55,7 @@ exports.student_detail = asyncHandler(async (req, res, next) => {
 
 exports.student_create_get = asyncHandler(async (req, res, next) => {
   const allAdvisors = await Advisor.find().exec();
-  res.json(allAdvisors);
+  res.json({ advisors: allAdvisors });
 });
 
 exports.student_create_post = [
@@ -77,12 +77,12 @@ exports.student_create_post = [
     .trim()
     .isLength({ min: 10, max: 10 })
     .escape(),
-  body("status.*").escape(),
   asyncHandler(async (req, res, next) => {
     const errors = validationResult(req);
-
+    // console.log(req.body);
+    // console.log(errors);
     const student = new Student({
-      _id: ObjectId(req.body.id),
+      // _id: ObjectId(req.body.id),
       first_name: req.body.first_name,
       family_name: req.body.family_name,
       academic_year: req.body.academic_year,
@@ -91,7 +91,9 @@ exports.student_create_post = [
       status: req.body.status,
       publications: [],
     });
-    if (req.body.advisor !== "undefined") student.advisor = req.body.advisor;
+    console.log(student);
+    if (req.body.advisor) student.advisor = req.body.advisor;
+    console.log(student);
 
     if (!errors.isEmpty()) {
       const allAdvisors = await Advisor.find.exec();
@@ -101,8 +103,9 @@ exports.student_create_post = [
         errors: errors.array(),
       });
     } else {
-      await student.save();
-      res.json(student);
+      const newStudent = await student.save();
+      console.log(newStudent);
+      res.json(newStudent);
     }
   }),
 ];
@@ -132,7 +135,7 @@ exports.student_update_get = asyncHandler(async (req, res, next) => {
 
   res.json({
     student: student,
-    advisor: allAdvisors,
+    advisors: allAdvisors,
   });
 });
 

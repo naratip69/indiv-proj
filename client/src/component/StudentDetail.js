@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import "../styles/StudentInfo.css";
 
 export default function StudentDetail() {
@@ -50,7 +50,15 @@ export default function StudentDetail() {
         </div>
         <div className="data">
           <h4>Adivsor:</h4>
-          <p>{studentDetail.advisor ? studentDetail.advisor.name : "-"}</p>
+          <p>
+            {studentDetail.advisor ? (
+              <Link to={`../${studentDetail.advisor.url}`}>
+                {studentDetail.advisor.name}
+              </Link>
+            ) : (
+              "-"
+            )}
+          </p>
         </div>
       </div>
       <div className="publiccations">

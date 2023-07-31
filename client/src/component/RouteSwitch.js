@@ -5,6 +5,7 @@ import AdvisorsList from "./AdvisorsList";
 import StudentsList from "./StudentsList";
 import StudentDetail from "./StudentDetail";
 import AdvisorDetail from "./AdvisorDetail";
+import StudentForm from "./StudentForm";
 
 export default function RouteSwitch() {
   return (
@@ -15,6 +16,7 @@ export default function RouteSwitch() {
           <Route path="/students" element={<StudentsList />} />
           <Route path="/advisors" element={<AdvisorsList />} />
           <Route path="/student/:id" element={<StudentDetail />} />
+          <Route path="/student/create" element={<StudentForm />} />
           <Route path="/advisor/:id" element={<AdvisorDetail />} />
         </Route>
       </Routes>
