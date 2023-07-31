@@ -9,7 +9,7 @@ export default function StudentForm() {
   const pathArray = path.split("/");
   const status = [
     "no Advisor",
-    "have Adivsor",
+    "have Advisor",
     "done proposal exam",
     "finished exam",
     "graduated",
@@ -121,7 +121,11 @@ export default function StudentForm() {
                     {e}
                   </option>
                 ))
-              : status.map((e) => <option value={e}>{e}</option>)}
+              : status.map((e) => (
+                  <option value={e} selected={e === "have Advisor"}>
+                    {e}
+                  </option>
+                ))}
           </select>
         </div>
         <div className="form-row">

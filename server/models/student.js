@@ -14,7 +14,7 @@ const StudentSchema = new Schema(
       require: true,
       enum: [
         "no Advisor",
-        "have Adivsor",
+        "have Advisor",
         "done proposal exam",
         "finished exam",
         "graduated",

@@ -111,7 +111,7 @@ exports.student_create_post = [
 ];
 
 exports.student_delete_post = asyncHandler(async (req, res, next) => {
-  const student = await Student.find({ id: req.params.id }).exec();
+  const student = await Student.findOne({ id: req.params.id }).exec();
   if (student === null) {
     const err = new Error("Student not found");
     err.status = 404;
@@ -123,7 +123,7 @@ exports.student_delete_post = asyncHandler(async (req, res, next) => {
 
 exports.student_update_get = asyncHandler(async (req, res, next) => {
   const [student, allAdvisors] = await Promise.all([
-    Student.find({ id: req.params.id }).populate("advisor").exec(),
+    Student.findOne({ id: req.params.id }).populate("advisor").exec(),
     Advisor.find().exec(),
   ]);
 
@@ -158,8 +158,8 @@ exports.student_update_post = [
   asyncHandler(async (req, res, next) => {
     const errors = validationResult(req);
 
-    const old_student = await Student.find(
-      { _id: req.params.id },
+    const old_student = await Student.findOne(
+      { id: req.params.id },
       { publications: 1 }
     ).exec();
 
