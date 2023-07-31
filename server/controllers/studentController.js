@@ -91,9 +91,11 @@ exports.student_create_post = [
       status: req.body.status,
       publications: [],
     });
-    console.log(student);
-    if (req.body.advisor) student.advisor = req.body.advisor;
-    console.log(student);
+    // console.log(student);
+    if (req.body.advisor) {
+      student.advisor = req.body.advisor;
+    }
+    // console.log(student);
 
     if (!errors.isEmpty()) {
       const allAdvisors = await Advisor.find().exec();
@@ -104,7 +106,7 @@ exports.student_create_post = [
       });
     } else {
       const newStudent = await student.save();
-      console.log(newStudent);
+      // console.log(newStudent);
       res.json(newStudent);
     }
   }),

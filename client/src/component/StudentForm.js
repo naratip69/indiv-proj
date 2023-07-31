@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from "react";
 import "../styles/StudentForm.css";
+import { Navigate } from "react-router-dom";
 
 export default function StudentForm() {
   const [advisors, setAdvisors] = useState([]);
   const [student, setStudent] = useState([]);
   const [inputStatus, setInputStatus] = useState("");
+  const [postData, setPostData] = useState({});
+  const [onSend, setOnSend] = useState(false);
+
   const URL = "http://localhost:5000";
   const path = window.location.pathname;
   const pathArray = path.split("/");
@@ -35,14 +39,21 @@ export default function StudentForm() {
     const form = document.querySelector(".form-data");
     const formData = new FormData(form);
     const data = new URLSearchParams(formData);
+    setOnSend(true);
     const res = await fetch(`${URL}${path}`, { method: "POST", body: data });
     // console.log(res);
     const resData = await res.json();
-    console.log(resData);
+    await setOnSend(false);
+    if (resData.errors) {
+      resData.errors.map(console.log);
+    } else {
+      setPostData(resData);
+    }
   }
 
   return (
     <div className="student-form">
+      {postData.url ? <Navigate to={`..${postData.url}`} /> : null}
       <h1>
         {pathArray.length === 3
           ? `Create ${pathArray[1]}`
@@ -145,17 +156,19 @@ export default function StudentForm() {
             {student
               ? advisors.map((e) => (
                   <option
-                    value={e}
+                    value={e._id}
                     selected={student.advisor.toSting() === e.toSting()}
                   >
                     {e.name}
                   </option>
                 ))
-              : advisors.map((e) => <option value={e}>{e.name}</option>)}
+              : advisors.map((e) => <option value={e._id}>{e.name}</option>)}
           </select>
         </div>
         <div className="form-row">
-          <button type="submit">Submit</button>
+          <button type="submit" disabled={onSend}>
+            Submit
+          </button>
         </div>
       </form>
     </div>

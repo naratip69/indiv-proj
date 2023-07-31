@@ -13,7 +13,7 @@ exports.advisor_detail = asyncHandler(async (req, res, next) => {
     Advisor.findById(req.params.id).exec(),
     Student.find(
       { advisor: req.params.id },
-      { publications: 0, status: 0, advisor: 0 }
+      { publications: 0, advisor: 0 }
     ).exec(),
   ]);
 
