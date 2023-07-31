@@ -1,0 +1,38 @@
+.form-data {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 15px;
+}
+
+label {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.form-data .form-row {
+  display: grid;
+  grid-template-columns: 140px 225px;
+}
+
+button {
+  height: 42px;
+  width: 180px;
+  border-radius: 5px;
+  border: #75c2f6 1px solid;
+  grid-column: 2/3;
+  justify-self: end;
+}
+
+button:hover {
+  border: antiquewhite 1px solid;
+  background-color: #75c2f6;
+  color: antiquewhite;
+}
+
+input,
+select {
+  border-radius: 5px;
+  border: #75c2f6 1px solid;
+  height: 19px;
+}

@@ -19,3 +19,28 @@ th:nth-child(5),
 td:nth-child(5) {
   width: 225px;
 }
+
+.filter {
+  display: grid;
+  grid-template-columns: 225px 300px 150px;
+  gap: 5px;
+  margin: 0px;
+  align-items: center;
+}
+
+.filter button {
+  width: 120px;
+  height: 29px;
+}
+
+.filter .form-row {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+}
+
+.filter input,
+.filter select {
+  width: 160px;
+  height: 18px;
+}

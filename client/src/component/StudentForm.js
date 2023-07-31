@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import "../styles/StudentForm.css";
 
 export default function StudentForm() {
   const [advisors, setAdvisors] = useState([]);
@@ -58,6 +59,7 @@ export default function StudentForm() {
             disabled={student}
             minLength={10}
             maxLength={10}
+            required
           ></input>
         </div>
         <div className="form-row" onSubmit={post}>
@@ -67,6 +69,7 @@ export default function StudentForm() {
             type="text"
             name="first_name"
             value={student ? student.first_name : null}
+            required
           ></input>
         </div>
         <div className="form-row">
@@ -76,6 +79,7 @@ export default function StudentForm() {
             type="text"
             name="family_name"
             value={student ? student.family_name : null}
+            required
           ></input>
         </div>
         <div className="form-row">
@@ -86,6 +90,7 @@ export default function StudentForm() {
             name="academic_year"
             value={student ? student.academic_year : null}
             min={0}
+            required
           ></input>
         </div>
         <div className="form-row">
@@ -95,6 +100,7 @@ export default function StudentForm() {
             type="email"
             name="email"
             value={student ? student.email : null}
+            required
           ></input>
         </div>
         <div className="form-row">
@@ -104,6 +110,7 @@ export default function StudentForm() {
             type="tel"
             name="tel"
             value={student ? student.tel : null}
+            required
           ></input>
         </div>
         <div className="form-row">
