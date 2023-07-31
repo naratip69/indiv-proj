@@ -1,20 +1,22 @@
 import React, { useState, useEffect } from "react";
-import advisor from "../../../server/models/advisor";
 
-export default function AdvisorList() {
+export default function AdvisorsList() {
   const [advisors, setAdvisors] = useState([{}]);
   const URL = "http://localhost:5000";
 
   useEffect(() => {
     async function fetchData() {
-      const res = await fetch(`${URL}/advisos`);
+      const res = await fetch(`${URL}/advisors`);
+      // console.log(res);
       const data = await res.json();
-      setAdvisors(data);
+      setAdvisors(data.advisors);
     }
+    fetchData();
   }, []);
 
   return (
     <div className="advisors-list">
+      <h1>Advisors</h1>
       <table>
         <tr>
           <th>Name</th>

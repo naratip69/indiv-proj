@@ -26,10 +26,11 @@ AdvisorSchema.virtual("name").get(function () {
   if (this.first_name && this.family_name) {
     fullname = `${this.first_name} ${this.family_name}`;
   }
+  return fullname;
 });
 
 AdvisorSchema.virtual("url").get(function () {
-  return `/info/advisor/${this._id}`;
+  return `/advisor/${this._id}`;
 });
 
 module.exports = mongoose.model("Advisor", AdvisorSchema);

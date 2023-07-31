@@ -4,11 +4,12 @@ import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 
 import StudentsList from "./component/StudentsList";
+import AdvisorList from "./component/AdvisorsList";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <StudentsList />
+    <AdvisorList />
   </React.StrictMode>
 );
 
