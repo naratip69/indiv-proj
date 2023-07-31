@@ -9,11 +9,12 @@ export default function StudentDetail() {
 
   useEffect(() => {
     async function fetchData() {
+      console.log(id);
       const res = await fetch(`${URL}/student/${id}`);
-      // console.log(res);
+      console.log(res);
       if (res.ok) {
         const data = await res.json();
-        // console.log(data);
+        console.log(data);
         setStudentDetail(data);
       }
     }
@@ -24,6 +25,10 @@ export default function StudentDetail() {
     <div className="student-info">
       <h1>Student Info</h1>
       <div className="content">
+        <div className="data">
+          <h4>ID:</h4>
+          <p>{studentDetail.id ?? "-"}</p>
+        </div>
         <div className="data">
           <h4>Name:</h4>
           <p>{studentDetail.name ?? "-"}</p>

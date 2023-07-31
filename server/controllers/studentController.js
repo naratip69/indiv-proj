@@ -40,7 +40,7 @@ exports.student_list_filter = asyncHandler(async (req, res, next) => {
 
 exports.student_detail = asyncHandler(async (req, res, next) => {
   console.log(req);
-  const student = await Student.findById(req.params.id)
+  const student = await Student.findOne({ id: req.params.id })
     .populate("advisor")
     .exec();
 
@@ -96,7 +96,7 @@ exports.student_create_post = [
     console.log(student);
 
     if (!errors.isEmpty()) {
-      const allAdvisors = await Advisor.find.exec();
+      const allAdvisors = await Advisor.find().exec();
       res.json({
         advisors: allAdvisors,
         student: student,
@@ -111,19 +111,19 @@ exports.student_create_post = [
 ];
 
 exports.student_delete_post = asyncHandler(async (req, res, next) => {
-  const student = await Student.findById(req.params.id).exec();
+  const student = await Student.find({ id: req.params.id }).exec();
   if (student === null) {
     const err = new Error("Student not found");
     err.status = 404;
     return next(err);
   }
-  await Student.findByIdAndDelete(req.params.id);
+  await Student.findByIdAndDelete(student._id);
   res.json(student);
 });
 
 exports.student_update_get = asyncHandler(async (req, res, next) => {
   const [student, allAdvisors] = await Promise.all([
-    Student.findById(req.params.id).populate("advisor").exec(),
+    Student.find({ id: req.params.id }).populate("advisor").exec(),
     Advisor.find().exec(),
   ]);
 
@@ -208,12 +208,12 @@ exports.student_add_publication = [
       res.json({ errors: errors.array() });
     }
 
-    const student = await Student.findById(req.params.id).exec();
+    const student = await Student.find({ id: req.params.id }).exec();
     const new_publication = { title: req.body.title, url: req.body.url };
     const new_publications = [...student.publications, new_publication];
 
     await Student.updateOne(
-      { _id: req.params.id },
+      { _id: student._id },
       { $set: { publications: new_publications } }
     );
 
@@ -240,7 +240,7 @@ exports.student_remove_publication = [
     );
 
     await Student.updateOne(
-      { _id: req.params.id },
+      { _id: student._id },
       { $set: { publications: new_publications } }
     );
 

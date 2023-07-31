@@ -55,9 +55,7 @@ export default function AdvisorDetail() {
             {students.map((e) => {
               return (
                 <tr>
-                  <td>
-                    {<Link to={`../student/${e._id}`}>{e._id}</Link> ?? "-"}
-                  </td>
+                  <td>{<Link to={`..${e.url}`}>{e.id}</Link> ?? "-"}</td>
                   <td>{e.name ?? "-"}</td>
                   <td>{e.academic_year ?? "-"}</td>
                   <td>{e.year_of_study ?? "-"}</td>
