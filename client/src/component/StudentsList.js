@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import "../styles/StudentList.css";
 
 export default function StudentsList() {
   const [students, setStudents] = useState([{}]);
@@ -92,7 +93,7 @@ export default function StudentsList() {
                   <td>{e.academic_year ?? "-"}</td>
                   <td>{e.year_of_study ?? "-"}</td>
                   <td>{e.email ?? "-"}</td>
-                  <td>{e.phone ?? "-"}</td>
+                  <td>{e.tel ?? "-"}</td>
                   <td>{e.status ?? "-"}</td>
                 </tr>
               );
