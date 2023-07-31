@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 export default function AdvisorsList() {
   const [advisors, setAdvisors] = useState([{}]);
@@ -27,7 +28,7 @@ export default function AdvisorsList() {
           ? advisors.map((e) => {
               return (
                 <tr>
-                  <td>{e.name ?? "-"}</td>
+                  <td>{<Link to={`..${e.url}`}>{e.name}</Link> ?? "-"}</td>
                   <td>{e.academic_title ?? "-"}</td>
                   <td>{e.email ?? "-"}</td>
                 </tr>
