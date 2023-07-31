@@ -4,6 +4,7 @@ import Sidebar from "./Sidebar";
 import AdvisorsList from "./AdvisorsList";
 import StudentsList from "./StudentsList";
 import StudentDetail from "./StudentDetail";
+import AdvisorDetail from "./AdvisorDetail";
 
 export default function RouteSwitch() {
   return (
@@ -14,6 +15,7 @@ export default function RouteSwitch() {
           <Route path="/students" element={<StudentsList />} />
           <Route path="/advisors" element={<AdvisorsList />} />
           <Route path="/student/:id" element={<StudentDetail />} />
+          <Route path="/advisor/:id" element={<AdvisorDetail />} />
         </Route>
       </Routes>
     </BrowserRouter>
