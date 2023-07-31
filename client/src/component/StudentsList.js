@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 export default function StudentsList() {
   const [students, setStudents] = useState([{}]);
@@ -84,7 +85,9 @@ export default function StudentsList() {
           ? students.map((e) => {
               return (
                 <tr>
-                  <td>{e._id ?? "-"}</td>
+                  <td>
+                    {<Link to={`../student/${e._id}`}>{e._id}</Link> ?? "-"}
+                  </td>
                   <td>{e.name ?? "-"}</td>
                   <td>{e.academic_year ?? "-"}</td>
                   <td>{e.year_of_study ?? "-"}</td>

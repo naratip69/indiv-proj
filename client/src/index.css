@@ -34,3 +34,8 @@ th,
 td {
   width: 120px;
 }
+
+a {
+  color: #1d5d8b;
+  text-decoration: none;
+}
