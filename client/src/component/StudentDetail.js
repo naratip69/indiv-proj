@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import "../styles/StudentInfo.css";
 
 export default function StudentDetail() {
   const [studentDetail, setStudentDetail] = useState({});
@@ -25,23 +26,27 @@ export default function StudentDetail() {
       <div className="content">
         <div className="data">
           <h4>Name:</h4>
-          <p>{studentDetail.name}</p>
+          <p>{studentDetail.name ?? "-"}</p>
         </div>
         <div className="data">
           <h4>Email:</h4>
-          <p>{studentDetail.email}</p>
+          <p>{studentDetail.email ?? "-"}</p>
         </div>
         <div className="data">
           <h4>Phone:</h4>
-          <p>{studentDetail.tel}</p>
+          <p>{studentDetail.tel ?? "-"}</p>
         </div>
         <div className="data">
           <h4>Academic year:</h4>
-          <p>{studentDetail.academic_year}</p>
+          <p>{studentDetail.academic_year ?? "-"}</p>
         </div>
         <div className="data">
           <h4>Year of study:</h4>
-          <p>{studentDetail.year_of_study}</p>
+          <p>{studentDetail.year_of_study ?? "-"}</p>
+        </div>
+        <div className="data">
+          <h4>Status:</h4>
+          <p>{studentDetail.status ?? "-"}</p>
         </div>
         <div className="data">
           <h4>Adivsor:</h4>
