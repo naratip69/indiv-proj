@@ -117,7 +117,7 @@ exports.advisor_update_get = asyncHandler(async (req, res, next) => {
     return next(err);
   }
 
-  res.json(advisor);
+  res.json({ advisor: advisor });
 });
 
 exports.advisor_update_post = [

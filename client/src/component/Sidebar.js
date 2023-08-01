@@ -15,6 +15,9 @@ export default function Sidebar() {
           <li>
             <Link to="/student/create">Add Student</Link>
           </li>
+          <li>
+            <Link to="/advisor/create">Add Advisor</Link>
+          </li>
         </ul>
       </nav>
       <Outlet />
