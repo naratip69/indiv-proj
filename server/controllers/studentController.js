@@ -301,5 +301,29 @@ exports.student_graduated_get = asyncHandler(async (req, res, next) => {
   students.map((e) => {
     stat[e.academic_year] += 1;
   });
+  stat.total = students.length;
+  res.json(stat);
+});
+
+exports.student_notGraduatedIn2_get = asyncHandler(async (req, res, next) => {
+  const date = new Date();
+  const filter = date.getFullYear() - 2;
+  const students = await Student.find(
+    { academic_year: { $lt: filter } },
+    { academic_year: 1 }
+  )
+    .sort({ academic_year: 1 })
+    .exec();
+  let stat = {};
+
+  if (students === null) {
+    const err = new Error("Students not found");
+    err.status = 404;
+    return next(err);
+  }
+  students.map((e) => {
+    stat[e.academic_year] += 1;
+  });
+  stat.total = students.length;
   res.json(stat);
 });
