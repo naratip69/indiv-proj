@@ -222,7 +222,10 @@ exports.student_add_publication = [
 
     // console.log(req.body);
     const student = await Student.findOne({ id: req.params.id }).exec();
-    const new_publication = { title: req.body.title, url: req.body.url };
+    const new_publication = {
+      title: req.body.title,
+      url: req.body.url.split("&#x2F;").join("/"),
+    };
     const new_publications = [...student.publications, new_publication];
     // console.log(student, new_publication, new_publications);
     student.publications = new_publications;

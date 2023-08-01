@@ -21,7 +21,7 @@ export default function PublicationForm(props) {
     });
     if (res.ok) {
       const resData = await res.json();
-      console.log(resData);
+      // console.log(resData);
       setPublications(resData);
       setTitle("");
       setUrl("");
@@ -37,6 +37,7 @@ export default function PublicationForm(props) {
           type="text"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
+          required
         ></input>
       </div>
       <div className="form-row">
@@ -47,6 +48,7 @@ export default function PublicationForm(props) {
           type="url"
           value={url}
           onChange={(e) => setUrl(e.target.value)}
+          required
         ></input>
       </div>
       <div className="form-row">

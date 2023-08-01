@@ -47,7 +47,7 @@ export default function Stat() {
         };
       });
     }
-    console.log(chartData);
+    // console.log(chartData);
   }, [label, dataSets]);
 
   return (
