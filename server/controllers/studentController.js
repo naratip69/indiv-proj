@@ -178,8 +178,10 @@ exports.student_update_post = [
       status: req.body.status,
       publications: old_student.publications,
     });
-    if (req.body.advisor) {
+    if (req.body.advisor && req.body.status !== "no Advisor") {
       student.advisor = req.body.advisor;
+    } else if (req.body.status === "no Advisor") {
+      student.advisor = null;
     }
     // console.log(req.body);
     // console.log(old_student);

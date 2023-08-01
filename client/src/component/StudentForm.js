@@ -59,6 +59,7 @@ export default function StudentForm() {
     const formData = new FormData(form);
     const data = new URLSearchParams(formData);
     setOnSend(true);
+    console.log("data", formData);
     const res = await fetch(`${URL}${path}`, { method: "POST", body: data });
     // console.log(res);
     const resData = await res.json();
@@ -180,7 +181,7 @@ export default function StudentForm() {
           </select>
         </div>
         <div className="form-row">
-          <label htmlFor="status">Adivsor</label>
+          <label htmlFor="advisor">Adivsor</label>
           <select
             id="advisor"
             name="advisor"
@@ -191,11 +192,16 @@ export default function StudentForm() {
                   <option
                     value={e._id}
                     selected={"" + student.advisor === "" + e._id}
+                    disabled={inputStatus === "no Advisor"}
                   >
                     {e.name}
                   </option>
                 ))
-              : advisors.map((e) => <option value={e._id}>{e.name}</option>)}
+              : advisors.map((e) => (
+                  <option value={e._id} disabled={inputStatus === "no Advisor"}>
+                    {e.name}
+                  </option>
+                ))}
           </select>
         </div>
         <div className="form-row">
