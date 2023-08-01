@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 
 export default function AdvisorDetail() {
@@ -7,6 +7,7 @@ export default function AdvisorDetail() {
   const [students, setStudents] = useState([]);
   const { id } = useParams();
   const URL = "http://localhost:5000";
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function fetchData() {
@@ -24,7 +25,20 @@ export default function AdvisorDetail() {
 
   return (
     <div className="advisor-info">
-      <h1>Advisor Info</h1>
+      <div className="edit-delete">
+        <h1>Advisor Info</h1>
+        <div className="butt-box">
+          <button
+            className="edit"
+            onClick={() => {
+              navigate("./update");
+            }}
+          >
+            Edit
+          </button>
+          <button className="delete">Delete</button>
+        </div>
+      </div>
       <div className="content">
         <div className="data">
           <h4>Name:</h4>
