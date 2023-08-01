@@ -7,7 +7,7 @@ export default function StudentsList() {
   const URL = "http://localhost:5000";
   const status = [
     "no Advisor",
-    "have Adivsor",
+    "have Advisor",
     "done proposal exam",
     "finished exam",
     "graduated",

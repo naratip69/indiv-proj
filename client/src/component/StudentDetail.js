@@ -22,6 +22,19 @@ export default function StudentDetail() {
     fetchData();
   }, []);
 
+  async function onDelete(e) {
+    e.preventDefault();
+    try {
+      const res = await fetch(`${URL}/student/${id}/delete`, {
+        method: "POST",
+      });
+      const data = await res.json();
+      if (data) navigate("/students");
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
   return (
     <div className="student-info">
       <div className="edit-delete">
@@ -35,7 +48,9 @@ export default function StudentDetail() {
           >
             Edit
           </button>
-          <button className="delete">Delete</button>
+          <button className="delete" onClick={onDelete}>
+            Delete
+          </button>
         </div>
       </div>
       <div className="content">
