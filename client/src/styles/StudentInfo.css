@@ -57,12 +57,13 @@ h4 {
 }
 
 .row {
-  border: black 1px solid;
+  /* border: black 1px solid; */
+  border-bottom: black 1px solid;
   height: 25px;
   padding: 3px;
   display: flex;
   align-items: center;
-  margin-top: 1px;
+  border-collapse: collapse;
 }
 
 .student-info .edit-delete,
@@ -120,6 +121,11 @@ h4 {
 
 .publications button:hover {
   background-color: #75c2f6;
+}
+
+.publications table {
+  width: 100%;
+  border-bottom: none;
 }
 
 .publication-form {

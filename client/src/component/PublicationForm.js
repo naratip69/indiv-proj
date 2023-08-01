@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
-export default function PublicationForm() {
+export default function PublicationForm(props) {
+  const { setPublications } = props;
   const [onSend, setOnSend] = useState(false);
+  const [title, setTitle] = useState();
+  const [url, setUrl] = useState();
   const URL = "http://localhost:5000";
   const { id } = useParams();
 
@@ -18,18 +21,33 @@ export default function PublicationForm() {
     });
     if (res.ok) {
       const resData = await res.json();
-      setOnSend(false);
+      console.log(resData);
+      setPublications(resData);
+      setTitle("");
+      setUrl("");
     }
   }
   return (
     <form className="publication-form" onSubmit={submit}>
       <div className="form-row">
         <label htmlFor="title">Title:</label>
-        <input id="title" name="title" type="text"></input>
+        <input
+          id="title"
+          name="title"
+          type="text"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+        ></input>
       </div>
       <div className="form-row">
         <label htmlFor="url">url:</label>
-        <input id="url" name="url" type="url"></input>
+        <input
+          id="url"
+          name="url"
+          type="url"
+          value={url}
+          onChange={(e) => setUrl(e.target.value)}
+        ></input>
       </div>
       <div className="form-row">
         <button type="submit" disabled={onSend}>

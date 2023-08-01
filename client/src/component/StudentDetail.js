@@ -7,6 +7,7 @@ import PublicationForm from "./PublicationForm";
 export default function StudentDetail() {
   const [studentDetail, setStudentDetail] = useState({});
   const [isOpen, setOpen] = useState(false);
+  const [publications, setPublications] = useState([]);
   const { id } = useParams();
   const URL = "http://localhost:5000";
   const navigate = useNavigate();
@@ -24,6 +25,12 @@ export default function StudentDetail() {
     }
     fetchData();
   }, []);
+
+  useEffect(() => {
+    if (studentDetail) {
+      setPublications(studentDetail.publications);
+    }
+  }, [studentDetail]);
 
   async function onDelete(e) {
     e.preventDefault();
@@ -101,7 +108,9 @@ export default function StudentDetail() {
       <div className="publications">
         <h4>Publications:</h4>
         <div className="add-publication">
-          {isOpen ? <PublicationForm /> : null}
+          {isOpen ? (
+            <PublicationForm setPublications={setPublications} />
+          ) : null}
           <button
             onClick={(e) => {
               e.preventDefault();
@@ -112,15 +121,17 @@ export default function StudentDetail() {
             {isOpen ? "x" : "+"}
           </button>
         </div>
-        {studentDetail.publications
-          ? studentDetail.publications.map((e) => {
+        {publications ? (
+          <table>
+            {publications.map((e) => {
               return (
                 <tr className="row">
                   <a href={e.url}>{e.title}</a>
                 </tr>
               );
-            })
-          : null}
+            })}
+          </table>
+        ) : null}
       </div>
     </div>
   );
