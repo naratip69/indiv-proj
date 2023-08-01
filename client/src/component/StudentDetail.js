@@ -10,12 +10,12 @@ export default function StudentDetail() {
 
   useEffect(() => {
     async function fetchData() {
-      console.log(id);
+      // console.log(id);
       const res = await fetch(`${URL}/student/${id}`);
-      console.log(res);
+      // console.log(res);
       if (res.ok) {
         const data = await res.json();
-        console.log(data);
+        // console.log(data);
         setStudentDetail(data);
       }
     }

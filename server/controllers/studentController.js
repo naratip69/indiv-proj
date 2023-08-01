@@ -13,7 +13,7 @@ exports.student_list = asyncHandler(async (req, res, next) => {
 exports.student_list_filter = asyncHandler(async (req, res, next) => {
   const status = req.body.status.toString();
   const year_of_study = req.body.year_of_study.toString();
-  console.log("test");
+  // console.log("test");
   if (status !== "undefined" && year_of_study) {
     const date = new Date();
     const students = await Student.find(
@@ -41,7 +41,7 @@ exports.student_list_filter = asyncHandler(async (req, res, next) => {
 });
 
 exports.student_detail = asyncHandler(async (req, res, next) => {
-  console.log(req);
+  // console.log(req);
   const student = await Student.findOne({ id: req.params.id })
     .populate("advisor")
     .exec();

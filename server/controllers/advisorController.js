@@ -105,7 +105,7 @@ exports.advisor_delete_post = asyncHandler(async (req, res, next) => {
   }
 
   await Advisor.findByIdAndDelete(req.params.id);
-  res.json(advisor);
+  res.json({ status: 200 });
 });
 
 exports.advisor_update_get = asyncHandler(async (req, res, next) => {

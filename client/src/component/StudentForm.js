@@ -59,7 +59,7 @@ export default function StudentForm() {
     const formData = new FormData(form);
     const data = new URLSearchParams(formData);
     setOnSend(true);
-    console.log("data", formData);
+    // console.log("data", formData);
     const res = await fetch(`${URL}${path}`, { method: "POST", body: data });
     // console.log(res);
     const resData = await res.json();

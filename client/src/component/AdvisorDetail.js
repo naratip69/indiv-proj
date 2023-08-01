@@ -15,13 +15,27 @@ export default function AdvisorDetail() {
       if (res.ok) {
         const data = await res.json();
         setAdvisorDetail(data.advisor);
-        console.log(data.students);
+        // console.log(data.students);
         setStudents(data.students);
-        console.log(students);
+        // console.log(students);
       }
     }
     fetchData();
   }, []);
+
+  async function onDelete(e) {
+    e.preventDefault();
+    try {
+      const res = await fetch(`${URL}/advisor/${id}/delete`, {
+        method: "POST",
+      });
+      const data = await res.json();
+      // console.log(data);
+      if (data) navigate("/advisors");
+    } catch (err) {
+      console.error(err);
+    }
+  }
 
   return (
     <div className="advisor-info">
@@ -36,7 +50,9 @@ export default function AdvisorDetail() {
           >
             Edit
           </button>
-          <button className="delete">Delete</button>
+          <button className="delete" onClick={onDelete}>
+            Delete
+          </button>
         </div>
       </div>
       <div className="content">
