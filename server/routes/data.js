@@ -42,4 +42,13 @@ router.post("/advisor/:id/update", advisor_controller.advisor_update_post);
 
 router.get("/advisor/:id", advisor_controller.advisor_detail);
 
+router.get("/stat/enroll", student_controller.student_enroll_get);
+
+router.get("/stat/graduated", student_controller.student_graduated_get);
+
+router.get(
+  "/stat/notGraduateIn2Y",
+  student_controller.student_notGraduatedIn2_get
+);
+
 module.exports = router;
