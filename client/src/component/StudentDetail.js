@@ -2,8 +2,11 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import "../styles/StudentInfo.css";
 
+import PublicationForm from "./PublicationForm";
+
 export default function StudentDetail() {
   const [studentDetail, setStudentDetail] = useState({});
+  const [isOpen, setOpen] = useState(false);
   const { id } = useParams();
   const URL = "http://localhost:5000";
   const navigate = useNavigate();
@@ -106,7 +109,16 @@ export default function StudentDetail() {
               );
             })
           : null}
-        <button>+</button>
+        {isOpen ? <PublicationForm /> : null}
+        <button
+          onClick={(e) => {
+            e.preventDefault();
+            setOpen((e) => !e);
+          }}
+          className={isOpen ? "open" : null}
+        >
+          {isOpen ? "x" : "+"}
+        </button>
       </div>
     </div>
   );

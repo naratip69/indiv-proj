@@ -107,11 +107,11 @@ h4 {
 .publications button {
   margin: 3px;
   width: 60px;
-  height: 35px;
+  height: 26px;
   color: antiquewhite;
   background-color: #45c2ff;
   border: none;
-  font-size: 27px;
+  font-size: 20px;
   border-radius: 14px;
   font-weight: 500;
   align-self: flex-end;
@@ -119,4 +119,30 @@ h4 {
 
 .publications button:hover {
   background-color: #75c2f6;
+}
+
+.publication-form {
+  display: flex;
+  margin: 4px;
+  gap: 4px;
+}
+
+.publication-form .form-row {
+  display: flex;
+  font-size: 16px;
+}
+
+.publication-form .form-row button {
+  width: 120px;
+  height: 24px;
+  font-size: 16px;
+}
+
+button.open {
+  background-color: red;
+  font-size: 20px;
+}
+
+button:hover.open {
+  background-color: lightcoral;
 }
