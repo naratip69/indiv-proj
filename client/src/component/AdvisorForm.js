@@ -6,6 +6,9 @@ export default function AdvisorForm() {
   const [inputStatus, setInputStatus] = useState("");
   const [postData, setPostData] = useState({});
   const [onSend, setOnSend] = useState(false);
+  const [firstName, setFirstName] = useState();
+  const [familyName, setFamilyName] = useState();
+  const [email, setEmail] = useState();
 
   const URL = "http://localhost:5000";
   const path = window.location.pathname;
@@ -28,6 +31,14 @@ export default function AdvisorForm() {
     }
     if (pathArray.length === 4) fetchData();
   }, []);
+
+  useEffect(() => {
+    if (advisor) {
+      setFirstName(advisor.first_name);
+      setFamilyName(advisor.family_name);
+      setEmail(advisor.email);
+    }
+  }, [advisor]);
 
   async function post(e) {
     e.preventDefault();
@@ -61,7 +72,8 @@ export default function AdvisorForm() {
             id="first-name"
             type="text"
             name="first_name"
-            value={advisor ? advisor.first_name : null}
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
             required
           ></input>
         </div>
@@ -71,7 +83,8 @@ export default function AdvisorForm() {
             id="family-name"
             type="text"
             name="family_name"
-            value={advisor ? advisor.family_name : null}
+            value={familyName}
+            onChange={(e) => setFamilyName(e.target.value)}
             required
           ></input>
         </div>
@@ -81,7 +94,8 @@ export default function AdvisorForm() {
             id="email"
             type="email"
             name="email"
-            value={advisor ? advisor.email : null}
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             required
           ></input>
         </div>

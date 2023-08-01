@@ -158,7 +158,7 @@ exports.advisor_update_post = [
         advisor,
         {}
       );
-      res.json(update_advisor);
+      res.json({ advisor: update_advisor });
     }
   }),
 ];

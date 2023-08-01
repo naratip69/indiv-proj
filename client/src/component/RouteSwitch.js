@@ -19,6 +19,7 @@ export default function RouteSwitch() {
           <Route path="/student/:id" element={<StudentDetail />} />
           <Route path="/student/:id/update" element={<StudentForm />} />
           <Route path="/student/create" element={<StudentForm />} />
+          <Route path="/advisor/:id/update" element={<AdvisorForm />} />
           <Route path="/advisor/:id" element={<AdvisorDetail />} />
           <Route path="/advisor/create" element={<AdvisorForm />} />
         </Route>
