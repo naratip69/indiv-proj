@@ -95,7 +95,7 @@ export default function StudentDetail() {
           </p>
         </div>
       </div>
-      <div className="publiccations">
+      <div className="publications">
         <h4>Publications:</h4>
         {studentDetail.publications
           ? studentDetail.publications.map((e) => {
@@ -106,6 +106,7 @@ export default function StudentDetail() {
               );
             })
           : null}
+        <button>+</button>
       </div>
     </div>
   );

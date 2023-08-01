@@ -94,12 +94,12 @@ exports.advisor_delete_post = asyncHandler(async (req, res, next) => {
     if (student.status === "have Advisor") {
       await Student.updateOne(
         { _id: student._id },
-        { $set: { status: "no Advisor", advisor: undefined } }
+        { $set: { status: "no Advisor", advisor: null } }
       );
     } else {
       await Student.updateOne(
         { _id: student._id },
-        { $set: { advisor: undefined } }
+        { $set: { advisor: null } }
       );
     }
   }

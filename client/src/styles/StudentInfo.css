@@ -57,7 +57,6 @@ h4 {
 }
 
 .row {
-  width: 85%;
   border: black 1px solid;
   height: 25px;
   padding: 3px;
@@ -97,4 +96,27 @@ h4 {
 .delete:hover {
   border: antiquewhite 1px solid;
   background-color: red;
+}
+
+.publications {
+  display: flex;
+  flex-direction: column;
+  width: 85%;
+}
+
+.publications button {
+  margin: 3px;
+  width: 60px;
+  height: 35px;
+  color: antiquewhite;
+  background-color: #45c2ff;
+  border: none;
+  font-size: 27px;
+  border-radius: 14px;
+  font-weight: 500;
+  align-self: flex-end;
+}
+
+.publications button:hover {
+  background-color: #75c2f6;
 }
