@@ -220,16 +220,17 @@ exports.student_add_publication = [
       res.json({ errors: errors.array() });
     }
 
-    const student = await Student.find({ id: req.params.id }).exec();
+    console.log(req.body);
+    const student = await Student.findOne({ id: req.params.id }).exec();
     const new_publication = { title: req.body.title, url: req.body.url };
     const new_publications = [...student.publications, new_publication];
-
+    console.log(student, new_publication, new_publications);
     await Student.updateOne(
       { _id: student._id },
       { $set: { publications: new_publications } }
     );
 
-    res.json(student);
+    res.json({ status: 200 });
   }),
 ];
 
@@ -256,6 +257,6 @@ exports.student_remove_publication = [
       { $set: { publications: new_publications } }
     );
 
-    res.json(student);
+    res.json({ status: 200 });
   }),
 ];

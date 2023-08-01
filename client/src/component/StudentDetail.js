@@ -100,25 +100,27 @@ export default function StudentDetail() {
       </div>
       <div className="publications">
         <h4>Publications:</h4>
+        <div className="add-publication">
+          {isOpen ? <PublicationForm /> : null}
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              setOpen((e) => !e);
+            }}
+            className={isOpen ? "open" : null}
+          >
+            {isOpen ? "x" : "+"}
+          </button>
+        </div>
         {studentDetail.publications
           ? studentDetail.publications.map((e) => {
               return (
-                <div className="row">
+                <tr className="row">
                   <a href={e.url}>{e.title}</a>
-                </div>
+                </tr>
               );
             })
           : null}
-        {isOpen ? <PublicationForm /> : null}
-        <button
-          onClick={(e) => {
-            e.preventDefault();
-            setOpen((e) => !e);
-          }}
-          className={isOpen ? "open" : null}
-        >
-          {isOpen ? "x" : "+"}
-        </button>
       </div>
     </div>
   );

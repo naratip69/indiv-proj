@@ -62,6 +62,7 @@ h4 {
   padding: 3px;
   display: flex;
   align-items: center;
+  margin-top: 1px;
 }
 
 .student-info .edit-delete,
@@ -125,6 +126,7 @@ h4 {
   display: flex;
   margin: 4px;
   gap: 4px;
+  align-items: center;
 }
 
 .publication-form .form-row {
@@ -141,8 +143,17 @@ h4 {
 button.open {
   background-color: red;
   font-size: 20px;
+  width: 60px;
+  height: 26px;
+  align-self: center;
 }
 
 button:hover.open {
   background-color: lightcoral;
+}
+
+.add-publication {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
