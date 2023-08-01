@@ -266,3 +266,14 @@ exports.student_remove_publication = [
     res.json(out.publications);
   }),
 ];
+
+exports.student_enroll_get = asyncHandler(async (req, res, next) => {
+  const students = await Student.find({}, { academic_year: 1 })
+    .sort({ academic_year: 1 })
+    .exec();
+  let stat = {};
+  students.map((e) => {
+    stat[e.academic_year] += 1;
+  });
+  res.json(stat);
+});
