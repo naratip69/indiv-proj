@@ -272,6 +272,32 @@ exports.student_enroll_get = asyncHandler(async (req, res, next) => {
     .sort({ academic_year: 1 })
     .exec();
   let stat = {};
+
+  if (students === null) {
+    const err = new Error("Students not found");
+    err.status = 404;
+    return next(err);
+  }
+  students.map((e) => {
+    stat[e.academic_year] += 1;
+  });
+  res.json(stat);
+});
+
+exports.student_graduated_get = asyncHandler(async (req, res, next) => {
+  const students = await Student.find(
+    { status: "graduated" },
+    { academic_year: 1 }
+  )
+    .sort({ academic_year: 1 })
+    .exec();
+  let stat = {};
+
+  if (students === null) {
+    const err = new Error("Students not found");
+    err.status = 404;
+    return next(err);
+  }
   students.map((e) => {
     stat[e.academic_year] += 1;
   });
