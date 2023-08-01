@@ -4,10 +4,16 @@ import { Navigate } from "react-router-dom";
 
 export default function StudentForm() {
   const [advisors, setAdvisors] = useState([]);
-  const [student, setStudent] = useState([]);
-  const [inputStatus, setInputStatus] = useState("");
+  const [student, setStudent] = useState({});
+  const [inputStatus, setInputStatus] = useState("have Advisor");
   const [postData, setPostData] = useState({});
   const [onSend, setOnSend] = useState(false);
+  const [resp, setResp] = useState({});
+  const [firstName, setFirstName] = useState();
+  const [familyName, setFamilyName] = useState();
+  const [academicYear, setAcademicYear] = useState();
+  const [email, setEmail] = useState();
+  const [tel, setTel] = useState();
 
   const URL = "http://localhost:5000";
   const path = window.location.pathname;
@@ -23,16 +29,29 @@ export default function StudentForm() {
   useEffect(() => {
     // console.log(path);
     async function fetchData() {
-      const res = await fetch(`${URL}${path}`);
-      if (res.ok) {
+      try {
+        const res = await fetch(`${URL}${path}`);
         const data = await res.json();
-        setAdvisors(data.advisors);
-        setStudent(data.student);
-        // console.log(advisors, student);
+        setAdvisors((e) => data["advisors"]);
+        setStudent((current) => data["student"]);
+        // console.log(data["advisors"], data.student);
+      } catch (err) {
+        console.log(err);
       }
     }
     fetchData();
   }, []);
+
+  useEffect(() => {
+    if (student) {
+      setInputStatus(student.status);
+      setFirstName(student.first_name);
+      setFamilyName(student.family_name);
+      setAcademicYear(student.academic_year);
+      setEmail(student.email);
+      setTel(student.tel);
+    }
+  }, [student]);
 
   async function post(e) {
     e.preventDefault();
@@ -66,8 +85,7 @@ export default function StudentForm() {
             id="id"
             type="text"
             name="id"
-            value={student ? student._id : null}
-            disabled={student}
+            value={student ? student.id : null}
             minLength={10}
             maxLength={10}
             required
@@ -79,7 +97,10 @@ export default function StudentForm() {
             id="first-name"
             type="text"
             name="first_name"
-            value={student ? student.first_name : null}
+            value={firstName}
+            onChange={(e) => {
+              setFirstName(e.target.value);
+            }}
             required
           ></input>
         </div>
@@ -89,7 +110,10 @@ export default function StudentForm() {
             id="family-name"
             type="text"
             name="family_name"
-            value={student ? student.family_name : null}
+            value={familyName}
+            onChange={(e) => {
+              setFamilyName(e.target.value);
+            }}
             required
           ></input>
         </div>
@@ -99,7 +123,10 @@ export default function StudentForm() {
             id="academic-year"
             type="number"
             name="academic_year"
-            value={student ? student.academic_year : null}
+            value={academicYear}
+            onChange={(e) => {
+              setAcademicYear(e.target.value);
+            }}
             min={0}
             required
           ></input>
@@ -110,7 +137,10 @@ export default function StudentForm() {
             id="email"
             type="email"
             name="email"
-            value={student ? student.email : null}
+            value={email}
+            onChange={(e) => {
+              setEmail(e.target.value);
+            }}
             required
           ></input>
         </div>
@@ -120,7 +150,10 @@ export default function StudentForm() {
             id="tel"
             type="tel"
             name="tel"
-            value={student ? student.tel : null}
+            value={tel}
+            onChange={(e) => {
+              setTel(e.target.value);
+            }}
             required
           ></input>
         </div>
@@ -157,7 +190,7 @@ export default function StudentForm() {
               ? advisors.map((e) => (
                   <option
                     value={e._id}
-                    selected={student.advisor.toSting() === e.toSting()}
+                    selected={"" + student.advisor === "" + e._id}
                   >
                     {e.name}
                   </option>

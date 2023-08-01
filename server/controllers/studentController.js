@@ -1,5 +1,7 @@
 const Advisor = require("../models/advisor");
 const Student = require("../models/student");
+const db = require("mongodb");
+const ObjectId = db.ObjectId;
 const asyncHandler = require("express-async-handler");
 const { body, validationResult } = require("express-validator");
 
@@ -125,7 +127,7 @@ exports.student_delete_post = asyncHandler(async (req, res, next) => {
 
 exports.student_update_get = asyncHandler(async (req, res, next) => {
   const [student, allAdvisors] = await Promise.all([
-    Student.findOne({ id: req.params.id }).populate("advisor").exec(),
+    Student.findOne({ id: req.params.id }).exec(),
     Advisor.find().exec(),
   ]);
 
@@ -167,6 +169,7 @@ exports.student_update_post = [
 
     const student = new Student({
       _id: old_student._id,
+      id: req.body.id,
       first_name: req.body.first_name,
       family_name: req.body.family_name,
       academic_year: req.body.academic_year,
@@ -175,8 +178,13 @@ exports.student_update_post = [
       status: req.body.status,
       publications: old_student.publications,
     });
-
-    if (req.body.advisor) student.advisor = req.body.advisor;
+    if (req.body.advisor) {
+      student.advisor = req.body.advisor;
+    }
+    // console.log(req.body);
+    // console.log(old_student);
+    // console.log(student);
+    // console.log(errors);
 
     if (!errors.isEmpty()) {
       const allAdvisors = Advisor.find().exec();
@@ -188,11 +196,11 @@ exports.student_update_post = [
       });
     } else {
       const update_student = await Student.findByIdAndUpdate(
-        req.params.id,
+        old_student._id,
         student,
         {}
       );
-      req.json(update_student);
+      res.json(update_student);
     }
   }),
 ];

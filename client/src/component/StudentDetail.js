@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import "../styles/StudentInfo.css";
 
 export default function StudentDetail() {
   const [studentDetail, setStudentDetail] = useState({});
   const { id } = useParams();
   const URL = "http://localhost:5000";
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function fetchData() {
@@ -26,7 +27,14 @@ export default function StudentDetail() {
       <div className="edit-delete">
         <h1>Student Info</h1>
         <div className="butt-box">
-          <button className="edit">Edit</button>
+          <button
+            className="edit"
+            onClick={() => {
+              navigate("./update");
+            }}
+          >
+            Edit
+          </button>
           <button className="delete">Delete</button>
         </div>
       </div>
