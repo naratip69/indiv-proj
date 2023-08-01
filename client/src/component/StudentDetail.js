@@ -23,7 +23,13 @@ export default function StudentDetail() {
 
   return (
     <div className="student-info">
-      <h1>Student Info</h1>
+      <div className="edit-delete">
+        <h1>Student Info</h1>
+        <div className="butt-box">
+          <button className="edit">Edit</button>
+          <button className="delete">Delete</button>
+        </div>
+      </div>
       <div className="content">
         <div className="data">
           <h4>ID:</h4>
