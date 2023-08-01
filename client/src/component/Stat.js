@@ -24,12 +24,13 @@ export default function Stat() {
       setLabel(Object.keys(data));
       setDataSets(Object.values(data));
     }
-  }, []);
+    fetchData();
+  }, [path]);
 
   useEffect(() => {
     if (label) {
       setChartData((e) => {
-        return { ...e, labels: label.map((x) => x !== "total") };
+        return { ...e, labels: label.filter((x) => x !== "total") };
       });
     }
 
@@ -46,12 +47,13 @@ export default function Stat() {
         };
       });
     }
+    console.log(chartData);
   }, [label, dataSets]);
 
   return (
     <div className="stat">
       <Chart chartData={chartData} />
-      {label && dataSets && label.includes("total") ? (
+      {label && dataSets && pathArray[2] !== "enroll" ? (
         <div>{dataSets[dataSets.length - 1]}</div>
       ) : null}
     </div>

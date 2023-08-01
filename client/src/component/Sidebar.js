@@ -18,6 +18,19 @@ export default function Sidebar() {
           <li>
             <Link to="/advisor/create">Add Advisor</Link>
           </li>
+          <br />
+          <li>
+            <h4>Stat</h4>
+          </li>
+          <li>
+            <Link to="/stat/enroll">#Enroll</Link>
+          </li>
+          <li>
+            <Link to="/stat/graduated">#Graduated</Link>
+          </li>
+          <li>
+            <Link to="/stat/notGraduatedIn2Y">#Not Graduated In Two Year</Link>
+          </li>
         </ul>
       </nav>
       <Outlet />

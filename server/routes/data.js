@@ -47,7 +47,7 @@ router.get("/stat/enroll", student_controller.student_enroll_get);
 router.get("/stat/graduated", student_controller.student_graduated_get);
 
 router.get(
-  "/stat/notGraduateIn2Y",
+  "/stat/notGraduatedIn2Y",
   student_controller.student_notGraduatedIn2_get
 );
 

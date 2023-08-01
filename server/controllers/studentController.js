@@ -279,8 +279,11 @@ exports.student_enroll_get = asyncHandler(async (req, res, next) => {
     return next(err);
   }
   students.map((e) => {
-    stat[e.academic_year] += 1;
+    stat[e.academic_year] = stat[e.academic_year]
+      ? stat[e.academic_year] + 1
+      : 1;
   });
+  stat.total = students.length;
   res.json(stat);
 });
 
@@ -322,7 +325,9 @@ exports.student_notGraduatedIn2_get = asyncHandler(async (req, res, next) => {
     return next(err);
   }
   students.map((e) => {
-    stat[e.academic_year] += 1;
+    stat[e.academic_year] = stat[e.academic_year]
+      ? stat[e.academic_year] + 1
+      : 1;
   });
   stat.total = students.length;
   res.json(stat);
