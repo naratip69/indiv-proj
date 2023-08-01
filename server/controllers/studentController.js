@@ -247,8 +247,9 @@ exports.student_remove_publication = [
       res.json({ errors: errors.array() });
     }
 
-    const student = await Student.findById(req.params.id).exec();
-    const new_publication = { title: req.body.title, url: req.body.url };
+    console.log(req.body);
+
+    const student = await Student.findOne({ id: req.params.id }).exec();
     const new_publications = student.publications.filter(
       (e) => e.title !== req.body.title
     );
@@ -258,6 +259,10 @@ exports.student_remove_publication = [
       { $set: { publications: new_publications } }
     );
 
-    res.json({ status: 200 });
+    const out = await Student.findOne(
+      { id: req.params.id },
+      { publications: 1 }
+    ).exec();
+    res.json(out.publications);
   }),
 ];

@@ -45,6 +45,21 @@ export default function StudentDetail() {
     }
   }
 
+  async function deletePublication(e, obj) {
+    e.preventDefault();
+    try {
+      const data = new URLSearchParams({ title: obj.title });
+      const res = await fetch(`${URL}/student/${id}/removePublication`, {
+        method: "POST",
+        body: data,
+      });
+      const resData = await res.json();
+      setPublications(resData);
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
   return (
     <div className="student-info">
       <div className="edit-delete">
@@ -125,9 +140,17 @@ export default function StudentDetail() {
           <table>
             {publications.map((e) => {
               return (
-                <tr className="row">
+                <div className="row">
                   <a href={e.url}>{e.title}</a>
-                </tr>
+                  <button
+                    className="row-button"
+                    onClick={(x) => {
+                      deletePublication(x, e);
+                    }}
+                  >
+                    x
+                  </button>
+                </div>
               );
             })}
           </table>
