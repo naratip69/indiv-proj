@@ -7,6 +7,9 @@ export default function Sidebar() {
       <nav className="sidebar">
         <ul>
           <li>
+            <h4>Data</h4>
+          </li>
+          <li>
             <Link to="/students">Students list</Link>
           </li>
           <li>
