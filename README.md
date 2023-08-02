@@ -2,4 +2,5 @@
 # indiv-proj
 
 
-to start go to server and run command "npm run dev" , go to client and run command "npm start"
+to start 
+go to server folder and run command "npm install" then "npm run dev" , go to client folder and run command "npm start"
