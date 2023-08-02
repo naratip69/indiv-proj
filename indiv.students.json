@@ -1,0 +1,75 @@
+[{
+  "_id": {
+    "$oid": "64c4b04b5d734075c629eccd"
+  },
+  "first_name": "test",
+  "family_name": "none",
+  "academic_year": 2020,
+  "email": "test@mail.com",
+  "tel": "0123456789",
+  "publications": [
+    {
+      "title": "google",
+      "url": "http://www.google.com",
+      "_id": {
+        "$oid": "64c8eb9de2765f60d5fc5b0c"
+      }
+    }
+  ],
+  "advisor": {
+    "$oid": "64c91ba83a874187b8e5f13d"
+  },
+  "id": "6300000021",
+  "status": "have Advisor"
+},
+{
+  "_id": {
+    "$oid": "64c7c285dac149c11381729d"
+  },
+  "first_name": "testing",
+  "family_name": "post",
+  "academic_year": 2020,
+  "email": "testmail@gmail.com",
+  "tel": "0912344567",
+  "status": "have Advisor",
+  "publications": [],
+  "__v": 0,
+  "id": "6430000021",
+  "advisor": {
+    "$oid": "64c91ba83a874187b8e5f13d"
+  }
+},
+{
+  "_id": {
+    "$oid": "64c7d7529ae1732a45efc7d4"
+  },
+  "id": "6430512321",
+  "first_name": "Potato",
+  "family_name": "Head",
+  "academic_year": 2020,
+  "email": "adsf@mail.com",
+  "tel": "0912324567",
+  "status": "graduated",
+  "publications": [],
+  "advisor": {
+    "$oid": "64c91ba83a874187b8e5f13d"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "64c7dbc3c7b4634cc1433a42"
+  },
+  "id": "6430030021",
+  "first_name": "noname",
+  "family_name": "unknow",
+  "academic_year": 2021,
+  "email": "no@mail.com",
+  "tel": "0913344567",
+  "status": "have Advisor",
+  "publications": [],
+  "advisor": {
+    "$oid": "64c91ba83a874187b8e5f13d"
+  },
+  "__v": 0
+}]
