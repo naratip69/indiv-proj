@@ -10,6 +10,16 @@ export default function Chart({ chartData }) {
         scales: {
           y: {
             ticks: { precision: 0 },
+            title: {
+              display: true,
+              text: "Number of students",
+            },
+          },
+          x: {
+            title: {
+              display: true,
+              text: "Admission year",
+            },
           },
         },
       }}
